@@ -40,15 +40,16 @@ class DevTools extends PluginBase{
 
 	public function onEnable(){
 		@mkdir($this->getWorkingDirectory());
+		@mkdir($this->getServer()->getFilePath()."devtools-plugins/");
 
 		$this->getServer()->getPluginManager()->registerInterface("FolderPluginLoader\\FolderPluginLoader");
-		$this->getServer()->getPluginManager()->loadPlugins($this->getServer()->getPluginPath(), ["FolderPluginLoader\\FolderPluginLoader"]);
+		$this->getServer()->getPluginManager()->loadPlugins($this->getServer()->getFilePath()."devtools-plugins/", ["FolderPluginLoader\\FolderPluginLoader"]);
 		$this->getLogger()->info("Registered folder plugin loader");
 		$this->getServer()->enablePlugins(PluginLoadOrder::STARTUP);
 	}
 
 	public function getWorkingDirectory(){
-		return $this->getServer()->getPluginPath() . "DevTools_OUTPUT" . DIRECTORY_SEPARATOR;
+		return $this->getServer()->getDataPath() . "DevTools_OUTPUT" . DIRECTORY_SEPARATOR;
 	}
 
 	public function getFile(){
